@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.ericsson.oss.mediation.models.netlog.configuration</groupId>
+		<artifactId>indoor-connect-8855-netlog-mediation-configuration</artifactId>
+		<version>1.0.12-SNAPSHOT</version>
+	</parent>
+	<artifactId>indoor-connect-8855-netlog-mediation-configuration-jar</artifactId>
+	<name>[${project.parent.artifactId}] JAR module</name>
+	<description>This module will process annotated models.</description>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.ericsson.oss.itpf.modeling</groupId>
+			<artifactId>modeling-annotation-jar</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.ericsson.oss.itpf.modeling.tools</groupId>
+				<artifactId>modeling-annotation-processor-jar</artifactId>
+				<version>${version.annotation-processor.plugin}</version>
+				<executions>
+					<execution>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>annoproc</goal>
+						</goals>
+						<configuration>
+							<classesRoot>${project.build.directory}/classes</classesRoot>
+							<modelBuildDir>model-build</modelBuildDir>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>model-build</directory>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-handwritten-files-to-model-processing</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                        <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <includeEmptyDirs>false</includeEmptyDirs>
+                            <outputDirectory>model-build/etc/model</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <!-- modeling.etc.model -->
+                                    <directory>src/main/resources</directory>
+                                    <includes>
+                                    <include>**/*.xml</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+		</plugins>
+	</build>
+	
+</project>

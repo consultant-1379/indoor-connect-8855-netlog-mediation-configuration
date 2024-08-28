@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************************* 
+   * COPYRIGHT Ericsson LMI 2017. All rights reserved. * * No part of this document 
+   may be reproduced in any form without the * written permission of the copyright 
+   owner.The contents of this document * are subject to revision without notice 
+   due to continued progress in * methodology, design and manufacturing. Ericsson 
+   shall have no liability * for any error or damage of any kind resulting from 
+   the use of this document. 
+   * ******************************************************************************* -->
+
+<med_configuration:MediationConfigurationDefinition
+   oss_common:lifeCycle="CURRENT" oss_common:name="IC8855NetlogMediationConfigurationModel"
+   oss_common:ns="Indoor-connect-8855" oss_common:version="1.0.0"
+   xmlns:med_configuration="urn:com:ericsson:schema:xml:oss:med_configuration"
+   xmlns:oss_common="urn:com:ericsson:schema:xml:oss:oss_common"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <oss_common:modelCreationInfo author="Chargers Team"
+      creationDate="15/05/2023">
+      <oss_common:designedModel componentId="IC8855-netlog-mediation-config-model" />
+   </oss_common:modelCreationInfo>
+
+   <oss_common:desc>Mediation configuration for netlog functionality of IC8855 nodes </oss_common:desc>
+   
+   <med_configuration:flowInvocation 
+       flowUrn="//SHARED_MED/NetLogCollectionSharedFlow/1.0.0">
+       <med_configuration:eventBasedInvocation 
+           eventTypeUrn="//global/NetlogCollectionRequest/1.0.0">
+       </med_configuration:eventBasedInvocation>
+   </med_configuration:flowInvocation>
+
+</med_configuration:MediationConfigurationDefinition>
